@@ -1,3 +1,5 @@
+import string
+
 from src.model.Destination import Destination
 
 import time
@@ -12,8 +14,8 @@ class DestinationOptimizrService:
         self
 
 
-Genome = List[int]
-Population = List[Genome]
+Genome = List[int]  # genome is a list of integers
+Population = List[Genome] # population is a list of genomes
 FitnessFunc = Callable[[Genome], int]
 PopulateFunc = Callable[[], Population]
 SelectionFunc = Callable[[Population, FitnessFunc], Tuple[Genome, Genome]]
@@ -90,7 +92,7 @@ def __mutation(genome: Genome, num: int = 1, probability: float = 0.5) -> Genome
     return genome
 
 
-def run_evolution(
+def __run_evolution(
         populate_func: PopulateFunc,
         fitness_func: FitnessFunc,
         fitness_limit: int,
@@ -129,8 +131,7 @@ def run_evolution(
     return population, i
 
 
-start = time.time()
-population, generations = run_evolution(
+population, generations = __run_evolution(
     populate_func=partial(
         __generate_population, size=10, genome_length=len(more_destinations)
     ),
@@ -140,16 +141,19 @@ population, generations = run_evolution(
     fitness_limit=2000,
     generation_limit=1000
 )
-end = time.time()
 
 
-def genome_to_things(genome: Genome, things: [Destination]) -> [Destination]:
+def __genome_to_things(genome: Genome, things: [Destination]) -> [Destination]:
     result = []
     for i, thing in enumerate(things):
         if genome[i] == 1:
             result += [thing.name]
 
     return result
+
+
+def get_optimized_destinations() -> [string]:
+    return __genome_to_things(population[0], more_destinations)
 
 
 def bestTimes(genome: Genome, things: [Destination]) -> [Destination]:
@@ -200,7 +204,7 @@ def genome_to_things_four(genome: Genome, things: [Destination]) -> [Destination
 # print(f"number of generations: {generations}")
 # print(f"time: {end - start}s")
 
-print(f"best solution: {genome_to_things(population[0], more_destinations)}")
+# print(f"best solution: {genome_to_things(population[0], more_destinations)}")
 
 # print(f"times: {bestTimes(population[0], more_destinations)}")
 # print(f"costs: {bestCosts(population[0], more_destinations)}")
