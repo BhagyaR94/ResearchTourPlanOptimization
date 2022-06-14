@@ -11,4 +11,4 @@ def index():
     return jsonify(destination_service.get_optimized_destinations())
 
 
-app.run(port=5555)
+app.run(port=8080)
