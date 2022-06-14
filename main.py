@@ -1,4 +1,3 @@
-import json
 from flask import Flask, jsonify
 
 from src.service import DestinationOptimizerService
