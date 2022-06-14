@@ -2,7 +2,6 @@ import string
 
 from src.model.Destination import Destination
 from src.util import DistanceUtil
-
 from src.service import OptimizerCore
 
 
@@ -27,15 +26,8 @@ more_destinations = [
 
 
 def get_optimized_destinations() -> [string]:
-    start_point = Destination('Katunayake Airport', 0, 0, 0, 'destination', 7.180474540914189, 79.8833508778138)
-    optimized_destinations = OptimizerCore.get_optimized_destinations(more_destinations, 24, 10000)
+    katunayake = Destination('Katunayake Airport', 0, 0, 0, 'destination', 7.180474540914189, 79.8833508778138)
+    mattala = Destination('Mattala Airport', 0, 0, 0, 'destination', 6.292807024583674, 81.12278893160014)
 
-    for opts in optimized_destinations:
-        print('opts - ', opts.name)
-
-    sorted_dests = DistanceUtil.sort_locations_minimum_distance(optimized_destinations, start_point)
-
-    for sorts in sorted_dests:
-        print('sorts - ', sorts.name)
-
-    # return DistanceUtil.sort_locations_minimum_distance(optimized_destinations, start_point)
+    return DistanceUtil.sort_locations_minimum_distance(
+        OptimizerCore.get_optimized_destinations(more_destinations, 36, 10000), mattala)
