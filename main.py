@@ -11,4 +11,6 @@ def index():
     return jsonify(destination_service.get_optimized_destinations())
 
 
-app.run(port=8080)
+app.secret_key = "secret"
+app.debug = True
+app.run()
