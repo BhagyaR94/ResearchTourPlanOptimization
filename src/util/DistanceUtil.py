@@ -2,6 +2,12 @@ import math
 from src.model import Destination
 
 
+class DistanceUtil:
+
+    def __init__(self):
+        self
+
+
 def get_distance_between_points(destination1: Destination, destination2: Destination) -> Destination:
     r = 6373.0
 
@@ -18,6 +24,43 @@ def get_distance_between_points(destination1: Destination, destination2: Destina
 
     distance = r * c
 
-    print("Result:", distance)
-    print("Should be:", 278.546, "km")
-    return distance;
+    return distance
+
+
+def sort_locations_minimum_distance(destinations: [Destination], start_point: Destination) -> [Destination]:
+    minimum_distance = 0
+    sorted_destinations = []
+    index_to_pop = 0
+    index = 0
+
+    while len(destinations) > 0:
+
+        for current_index, current_destination in enumerate(destinations):
+            if index == 0:
+                distance = get_distance_between_points(start_point, destinations[current_index])
+
+                if index == 0 and current_index == 0:
+                    minimum_distance = distance
+                    index_to_pop = current_index
+                else:
+                    if distance < minimum_distance:
+                        minimum_distance = distance
+                        index_to_pop = current_index
+            else:
+                distance = get_distance_between_points(sorted_destinations[len(sorted_destinations) - 1],
+                                                       destinations[current_index])
+
+                if current_index == 0:
+                    minimum_distance = distance
+                    index_to_pop = current_index
+                else:
+                    if distance < minimum_distance:
+                        minimum_distance = distance
+                        index_to_pop = current_index
+
+        index = index + 1
+
+        sorted_destinations.append(destinations[index_to_pop])
+        destinations.pop(index_to_pop)
+
+    return sorted_destinations
