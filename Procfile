@@ -1,1 +1,1 @@
-web: gunicorn research-algorithm.wsgi
+web: gunicorn main:app --log-file
