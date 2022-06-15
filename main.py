@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def root():
-    return 'hello'
+    return DestinationOptimizerService.get_tuples_from_csv()
 
 
 @app.route('/test')

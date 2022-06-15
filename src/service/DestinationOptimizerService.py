@@ -3,6 +3,7 @@ import string
 from src.model.Destination import Destination
 from src.util import DistanceUtil
 from src.service import OptimizerCore
+from src.util import FileUtils
 
 
 class DestinationOptimizrService:
@@ -25,9 +26,20 @@ more_destinations = [
 ]
 
 
+def get_tuples_from_csv(path: string) -> [Destination]:
+    data = FileUtils.get_tuples_from_csv(path)
+
+    destinations = []
+    for row in data:
+        destination = Destination(row[0], int(row[1]), int(row[2]), int(row[3]), row[4], float(row[5]), float(row[6]))
+        destinations.append(destination)
+
+    return destinations
+
+
 def get_optimized_destinations() -> [string]:
     katunayake = Destination('Katunayake Airport', 0, 0, 0, 'destination', 7.180474540914189, 79.8833508778138)
     mattala = Destination('Mattala Airport', 0, 0, 0, 'destination', 6.292807024583674, 81.12278893160014)
 
     return DistanceUtil.sort_locations_minimum_distance(
-        OptimizerCore.get_optimized_destinations(more_destinations, 36, 10000), mattala)
+        OptimizerCore.get_optimized_destinations(get_tuples_from_csv('datasets/destinations.csv'), 36, 10000), mattala)
