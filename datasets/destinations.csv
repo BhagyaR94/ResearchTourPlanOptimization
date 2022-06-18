@@ -1,11 +1,11 @@
-﻿name,value,time,price,type,lat,lon
-Yala Safari,5,5,500,destination,6.368638476,81.51745181
-Dambulla Rock Temple,10,2,100,destination,7.856799711,80.6490076
-Nuwara Eliya City Tour,15,1,50,destination,6.949490517,80.78558115
-Kandy Temple Of Tooth,500,1,200,destination,7.293811176,80.64173267
-Train from Kandy to Ella,100,6,300,destination,7.289468406,80.63190368
-Ella Eco Hike,600,8,50,destination,6.866629756,81.04644578
-Sigiriya,170,3,800,destination,7.958758044,80.76045722
-Dunhinda,60,1,200,destination,7.017722703,81.06388734
-Mirissa Whale Watching,60,6,1000,destination,5.94911871,80.44879553
-Arugam Bay Surfing,30,4,100,destination,6.838134259,81.82617002
+﻿name,category1,category1_value,category2,category2_value,category3,category3_value,time,price,type,lat,lon
+Yala Safari,safari,60,animals,45,jungle,50,5,500,destination,6.368638476,81.51745181
+Dambulla Rock Temple,heritage,70,buddhism,80,scenic,40,2,100,destination,7.856799711,80.6490076
+Nuwara Eliya City Tour,city,40,scenic,60,mountain,40,1,50,destination,6.949490517,80.78558115
+Kandy Temple Of Tooth,heritage,70,buddhism,80,arts,60,1,200,destination,7.293811176,80.64173267
+Train from Kandy to Ella,scenic,80,train,60,nature,50,6,300,destination,7.289468406,80.63190368
+Ella Eco Hike,hiking,80,nature,70,mountain,70,8,50,destination,6.866629756,81.04644578
+Sigiriya,heritage,75,hiking,50,arts,70,3,800,destination,7.958758044,80.76045722
+Dunhinda,scenic,45,waterfall,60,nature,50,1,200,destination,7.017722703,81.06388734
+Mirissa Whale Watching,cruise,75,animals,50,sea,60,6,1000,destination,5.94911871,80.44879553
+Arugam Bay Surfing,surfing,60,beach,60,sea,60,4,100,destination,6.838134259,81.82617002

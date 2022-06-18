@@ -12,34 +12,31 @@ class DestinationOptimizrService:
         self
 
 
-more_destinations = [
-    Destination('Yala Safari', 5, 5, 500, 'destination', 6.3686384758281624, 81.51745180675918),
-    Destination('Dambulla Rock Temple', 10, 2, 100, 'destination', 7.856799710633441, 80.64900760288403),
-    Destination('Nuwara Eliya City Tour', 15, 1, 50, 'destination', 6.9494905173802515, 80.78558115275386),
-    Destination('Kandy Temple Of Tooth', 500, 1, 200, 'destination', 7.293811176348765, 80.64173267217323),
-    Destination('Train from Kandy to Ella', 100, 6, 300, 'destination', 7.289468405771871, 80.63190367572007),
-    Destination('Ella Eco Hike', 600, 8, 500, 'destination', 6.866629755612183, 81.04644578358516),
-    Destination('Sigiriya', 170, 3, 800, 'destination', 7.958758044344503, 80.76045722332174),
-    Destination('Dunhinda', 60, 1, 200, 'destination', 7.017722702597019, 81.06388734147676),
-    Destination('Mirissa Whale Watching', 60, 6, 1000, 'destination', 5.94911871048566, 80.44879552605009),
-    Destination('Arugam Bay Surfing', 30, 4, 100, 'destination', 6.838134259204478, 81.82617002477654),
-]
+categories = ['adventure', 'animals', 'arts', 'beach', 'buddhism', 'city', 'cruise', 'drinks', 'elephants', 'food',
+              'heritage', 'hiking', 'hunting', 'jungle', 'liquor', 'mountain', 'nature', 'none', 'rafting', 'rivers',
+              'safari', 'scenic', 'sea', 'shooting', 'surfing', 'train', 'waterfall']
 
 
-def get_tuples_from_csv(path: string) -> [Destination]:
+def get_tuples_from_csv(path: string, selected_categories: []) -> [Destination]:
     data = FileUtils.get_tuples_from_csv(path)
 
     destinations = []
     for row in data:
-        destination = Destination(row[0], int(row[1]), int(row[2]), int(row[3]), row[4], float(row[5]), float(row[6]))
-        destinations.append(destination)
+        if set(selected_categories) & {row[1], row[3], row[5]}:
+            destination = Destination(row[0], row[1], int(row[2]), row[3], int(row[4]), row[5], int(row[6]), int(row[7]),
+                                      int(row[8]), row[9], float(row[10]), float(row[11]))
+            destinations.append(destination)
 
     return destinations
 
 
-def get_optimized_destinations() -> [string]:
-    katunayake = Destination('Katunayake Airport', 0, 0, 0, 'destination', 7.180474540914189, 79.8833508778138)
-    mattala = Destination('Mattala Airport', 0, 0, 0, 'destination', 6.292807024583674, 81.12278893160014)
+def get_optimized_destinations(selected_categories: []) -> [string]:
+    katunayake = Destination('Katunayake Airport', 'none', 0, 'none', 0, 'none', 0, 'destination', 0, 0,
+                             7.180474540914189,
+                             79.8833508778138)
+    mattala = Destination('Mattala Airport', 'none', 0, 'none', 0, 'none', 0, 'destination', 0, 0, 6.292807024583674,
+                          81.12278893160014)
 
     return DistanceUtil.sort_locations_minimum_distance(
-        OptimizerCore.get_optimized_destinations(get_tuples_from_csv('datasets/destinations.csv'), 36, 10000), mattala)
+        OptimizerCore.get_optimized_destinations(get_tuples_from_csv('datasets/destinations.csv', selected_categories), 24, 10000,
+                                                 categories), mattala)

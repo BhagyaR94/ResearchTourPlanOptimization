@@ -28,7 +28,7 @@ def __generate_population(size: int, genome_length: int) -> Population:
     return [__generate_genome(genome_length) for _ in range(size)]
 
 
-def __fitness_destinations(genome: Genome, destinations: [Destination], time_limit: int, price_limit: int) -> int:
+def __fitness_destinations(genome: Genome, destinations: [Destination], time_limit: int, price_limit: int, categories: []) -> int:
     if len(genome) != len(destinations):
         raise ValueError("genome and destinations must match and be of same length")
 
@@ -39,7 +39,7 @@ def __fitness_destinations(genome: Genome, destinations: [Destination], time_lim
     for i, destination in enumerate(destinations):
         if genome[i] == 1:
             duration += destination.time
-            value += destination.value
+            value += (destination.category1_value + destination.category2_value + destination.category3_value)
             price += destination.price
 
             if (duration > time_limit) | (price > price_limit):
@@ -124,13 +124,15 @@ def __genome_to_things(genome: Genome, things: [Destination]) -> [Destination]:
     return result
 
 
-def get_optimized_destinations(more_destinations: [Destination], time_limit: int, price_limit: int) -> [string]:
+def get_optimized_destinations(more_destinations: [Destination], time_limit: int, price_limit: int, categories: []) -> [
+    string]:
     population, generations = __run_evolution(
         populate_func=partial(
             __generate_population, size=10, genome_length=len(more_destinations)
         ),
         fitness_func=partial(
-            __fitness_destinations, destinations=more_destinations, time_limit=time_limit, price_limit=price_limit
+            __fitness_destinations, destinations=more_destinations, time_limit=time_limit, price_limit=price_limit,
+            categories=categories
         ),
         fitness_limit=2000,
         generation_limit=1000
