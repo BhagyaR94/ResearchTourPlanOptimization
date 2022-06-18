@@ -1,4 +1,6 @@
+import datetime
 import string
+import time
 
 from src.model.Destination import Destination
 from src.util import DistanceUtil
@@ -23,10 +25,10 @@ def get_tuples_from_csv(path: string, selected_categories: []) -> [Destination]:
     destinations = []
     for row in data:
         if set(selected_categories) & {row[1], row[3], row[5]}:
-            destination = Destination(row[0], row[1], int(row[2]), row[3], int(row[4]), row[5], int(row[6]), int(row[7]),
+            destination = Destination(row[0], row[1], int(row[2]), row[3], int(row[4]), row[5], int(row[6]),
+                                      int(row[7]),
                                       int(row[8]), row[9], float(row[10]), float(row[11]))
             destinations.append(destination)
-
     return destinations
 
 
@@ -38,5 +40,5 @@ def get_optimized_destinations(selected_categories: []) -> [string]:
                           81.12278893160014)
 
     return DistanceUtil.sort_locations_minimum_distance(
-        OptimizerCore.get_optimized_destinations(get_tuples_from_csv('datasets/destinations.csv', selected_categories), 24, 10000,
-                                                 categories), mattala)
+        OptimizerCore.get_optimized_destinations(get_tuples_from_csv('datasets/destinations.csv', selected_categories),
+                                                 36, 10000, selected_categories), mattala)
