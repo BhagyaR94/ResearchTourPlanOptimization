@@ -33,7 +33,7 @@ def get_tuples_from_csv(path: string, selected_categories: []) -> [Destination]:
     return destinations
 
 
-def get_optimized_destinations(selected_categories: []) -> string:
+def get_optimized_destinations(selected_categories: [], duration_of_stay: int, budget: int) -> string:
     katunayake = Destination('Katunayake Airport', 'none', 0, 'none', 0, 'none', 0, 'destination', 0, 0,
                              7.180474540914189,
                              79.8833508778138)
@@ -42,7 +42,7 @@ def get_optimized_destinations(selected_categories: []) -> string:
 
     destinations = DistanceUtil.sort_locations_minimum_distance(
         OptimizerCore.get_optimized_destinations(get_tuples_from_csv('datasets/destinations.csv', selected_categories),
-                                                 36, 10000, selected_categories), mattala)
+                                                 duration_of_stay, budget, selected_categories), mattala)
 
     objects = []
     for destination in destinations:
