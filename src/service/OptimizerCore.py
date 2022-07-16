@@ -1,5 +1,4 @@
 import string
-import time
 from functools import partial
 from random import choices, randint, randrange, random
 from typing import List, Callable, Tuple
