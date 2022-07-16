@@ -16,7 +16,7 @@ def root():
 @app.route('/loadOptimizedDestinations', methods=['POST'])
 def get_destinations():
     destination_service = DestinationOptimizerService
-    return jsonify(destination_service.get_optimized_destinations(request.get_json()['categories']))
+    return jsonify(destination_service.get_optimized_destinations(request.get_json()['categories'], request.get_json()['durationOfStay'], request.get_json()['budget']))
 
 
 @app.route('/loadOptimizedRestaurants')
