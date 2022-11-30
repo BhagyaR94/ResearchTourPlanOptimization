@@ -40,7 +40,7 @@ def __fitness_destinations(genome: Genome, destinations: [Destination], time_lim
     for i, destination in enumerate(destinations):
         if genome[i] == 1:
             duration += destination.time
-            value += __get_value(selected_categories, destination)
+            value += destination.category1_value
             price += destination.price
 
             if (duration > time_limit) | (price > price_limit):
@@ -49,18 +49,18 @@ def __fitness_destinations(genome: Genome, destinations: [Destination], time_lim
     return value
 
 
-def __get_value(selected_categories: [], destination: Destination) -> int:
-    total_value = 0
-    if set(selected_categories) & {destination.category1}:
-        total_value += destination.category1_value
-
-    if set(selected_categories) & {destination.category2}:
-        total_value += destination.category2_value
-
-    if set(selected_categories) & {destination.category3}:
-        total_value += destination.category3_value
-
-    return int(total_value / len(selected_categories))
+# def __get_value(selected_categories: [], destination: Destination) -> int:
+#     total_value = 0
+#     if set(selected_categories) & {destination.category1}:
+#         total_value += destination.category1_value
+#
+#     if set(selected_categories) & {destination.category2}:
+#         total_value += destination.category2_value
+#
+#     if set(selected_categories) & {destination.category3}:
+#         total_value += destination.category3_value
+#
+#     return int(total_value / len(selected_categories))
 
 
 def __selection_pair(population: Population, fitness_func: FitnessFunc) -> Population:
@@ -139,7 +139,7 @@ def __genome_to_things(genome: Genome, things: [Destination]) -> [Destination]:
     return result
 
 
-def get_optimized_destinations(more_destinations: [Destination], time_limit: int, price_limit: int,
+def get_optimized_destinations(more_destinations: [Destination], time_limit: float, price_limit: float,
                                selected_categories: []) -> [string]:
     # start = time.time()
 
