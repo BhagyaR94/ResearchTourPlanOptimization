@@ -48,19 +48,20 @@ def get_optimized_destinations(selected_categories: [], duration_of_stay: int, b
     category2 = get_tuples_from_csv('datasets/destinations.csv', selected_categories)[1]
     category3 = get_tuples_from_csv('datasets/destinations.csv', selected_categories)[2]
 
-    optimized_destinations_cat1 = DistanceUtil.sort_locations_minimum_distance(
-        OptimizerCore.get_optimized_destinations(category1,
-                                                 ((duration_of_stay*50)/100), ((budget*50)/100), selected_categories), mattala)
+    optimized_destinations_cat1 = OptimizerCore.get_optimized_destinations(category1,
+                                                                           ((duration_of_stay * 50) / 100),
+                                                                           ((budget * 50) / 100), selected_categories)
 
-    optimized_destinations_cat2 = DistanceUtil.sort_locations_minimum_distance(
-        OptimizerCore.get_optimized_destinations(category2,
-                                                 ((duration_of_stay*30)/100), ((budget*30)/100), selected_categories), mattala)
+    optimized_destinations_cat2 = OptimizerCore.get_optimized_destinations(category2,
+                                                                           ((duration_of_stay * 30) / 100),
+                                                                           ((budget * 30) / 100), selected_categories)
 
-    optimized_destinations_cat3 = DistanceUtil.sort_locations_minimum_distance(
-        OptimizerCore.get_optimized_destinations(category3,
-                                                 ((duration_of_stay*20)/100), ((budget*20)/100), selected_categories), mattala)
+    optimized_destinations_cat3 = OptimizerCore.get_optimized_destinations(category3,
+                                                                           ((duration_of_stay * 20) / 100),
+                                                                           ((budget * 20) / 100), selected_categories)
 
-    destinations = optimized_destinations_cat1 + optimized_destinations_cat2 + optimized_destinations_cat3
+    destinations = DistanceUtil.sort_locations_minimum_distance(
+        (optimized_destinations_cat1 + optimized_destinations_cat2 + optimized_destinations_cat3), mattala)
 
     objects = []
     for destination in destinations:
